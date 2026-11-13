@@ -1,0 +1,996 @@
+{
+  "summary": [
+    {
+      "level": 1,
+      "policy": "do_nothing",
+      "mean_score": 0.0,
+      "min_score": 0.0,
+      "max_score": 0.0,
+      "mean_yield": 0.0,
+      "mean_budget": 0.0
+    },
+    {
+      "level": 1,
+      "policy": "stop_early",
+      "mean_score": 0.0,
+      "min_score": 0.0,
+      "max_score": 0.0,
+      "mean_yield": 0.0,
+      "mean_budget": 0.0
+    },
+    {
+      "level": 1,
+      "policy": "open_loop_physics",
+      "mean_score": 1.0,
+      "min_score": 1.0,
+      "max_score": 1.0,
+      "mean_yield": 1.0,
+      "mean_budget": 0.0
+    },
+    {
+      "level": 1,
+      "policy": "reference",
+      "mean_score": 1.0,
+      "min_score": 1.0,
+      "max_score": 1.0,
+      "mean_yield": 1.0,
+      "mean_budget": 0.0
+    },
+    {
+      "level": 2,
+      "policy": "do_nothing",
+      "mean_score": 0.0,
+      "min_score": 0.0,
+      "max_score": 0.0,
+      "mean_yield": 0.0,
+      "mean_budget": 0.0
+    },
+    {
+      "level": 2,
+      "policy": "stop_early",
+      "mean_score": 0.0,
+      "min_score": 0.0,
+      "max_score": 0.0,
+      "mean_yield": 0.0,
+      "mean_budget": 0.0
+    },
+    {
+      "level": 2,
+      "policy": "open_loop_physics",
+      "mean_score": 0.9993464052287582,
+      "min_score": 0.9990196078431373,
+      "max_score": 1.0,
+      "mean_yield": 0.9993464052287582,
+      "mean_budget": 0.0
+    },
+    {
+      "level": 2,
+      "policy": "reference",
+      "mean_score": 0.9993464052287582,
+      "min_score": 0.9990196078431373,
+      "max_score": 1.0,
+      "mean_yield": 0.9993464052287582,
+      "mean_budget": 0.0
+    },
+    {
+      "level": 3,
+      "policy": "do_nothing",
+      "mean_score": 0.0,
+      "min_score": 0.0,
+      "max_score": 0.0,
+      "mean_yield": 0.0,
+      "mean_budget": 0.0
+    },
+    {
+      "level": 3,
+      "policy": "stop_early",
+      "mean_score": 0.0,
+      "min_score": 0.0,
+      "max_score": 0.0,
+      "mean_yield": 0.0,
+      "mean_budget": 0.0
+    },
+    {
+      "level": 3,
+      "policy": "open_loop_physics",
+      "mean_score": 0.32941176470588235,
+      "min_score": 0.0,
+      "max_score": 0.9882352941176471,
+      "mean_yield": 0.32941176470588235,
+      "mean_budget": 0.0
+    },
+    {
+      "level": 3,
+      "policy": "reference",
+      "mean_score": 0.9800232026143791,
+      "min_score": 0.9793696078431373,
+      "max_score": 0.98035,
+      "mean_yield": 0.9996732026143791,
+      "mean_budget": 3.93
+    }
+  ],
+  "runs": [
+    {
+      "policy": "do_nothing",
+      "level": 1,
+      "seed": 0,
+      "n_wafers": 0,
+      "actions": 0,
+      "submitted": false,
+      "recipe": null,
+      "lot_yield": 0.0,
+      "budget_spent": 0.0,
+      "score": 0.0,
+      "fail_breakdown": {},
+      "seconds": 0.0
+    },
+    {
+      "policy": "do_nothing",
+      "level": 1,
+      "seed": 1,
+      "n_wafers": 0,
+      "actions": 0,
+      "submitted": false,
+      "recipe": null,
+      "lot_yield": 0.0,
+      "budget_spent": 0.0,
+      "score": 0.0,
+      "fail_breakdown": {},
+      "seconds": 0.0
+    },
+    {
+      "policy": "do_nothing",
+      "level": 1,
+      "seed": 2,
+      "n_wafers": 0,
+      "actions": 0,
+      "submitted": false,
+      "recipe": null,
+      "lot_yield": 0.0,
+      "budget_spent": 0.0,
+      "score": 0.0,
+      "fail_breakdown": {},
+      "seconds": 0.0
+    },
+    {
+      "policy": "stop_early",
+      "level": 1,
+      "seed": 0,
+      "n_wafers": 0,
+      "actions": 1,
+      "submitted": true,
+      "recipe": {
+        "implant_dose": 1000000000000.0,
+        "implant_energy": 20.0,
+        "anneal_temp": 980.0,
+        "anneal_time": 90.0,
+        "ox_temp": 900.0,
+        "ox_time": 60.0,
+        "gate_length": 0.47
+      },
+      "lot_yield": 0.0,
+      "budget_spent": 0.0,
+      "score": 0.0,
+      "fail_breakdown": {
+        "vt_low": 1.0,
+        "vt_high": 0.0,
+        "ion_low": 0.0,
+        "ioff_high": 1.0,
+        "tox_thin": 0.0
+      },
+      "seconds": 0.09
+    },
+    {
+      "policy": "stop_early",
+      "level": 1,
+      "seed": 1,
+      "n_wafers": 0,
+      "actions": 1,
+      "submitted": true,
+      "recipe": {
+        "implant_dose": 1000000000000.0,
+        "implant_energy": 20.0,
+        "anneal_temp": 980.0,
+        "anneal_time": 90.0,
+        "ox_temp": 900.0,
+        "ox_time": 60.0,
+        "gate_length": 0.47
+      },
+      "lot_yield": 0.0,
+      "budget_spent": 0.0,
+      "score": 0.0,
+      "fail_breakdown": {
+        "vt_low": 1.0,
+        "vt_high": 0.0,
+        "ion_low": 0.0,
+        "ioff_high": 1.0,
+        "tox_thin": 0.0
+      },
+      "seconds": 0.05
+    },
+    {
+      "policy": "stop_early",
+      "level": 1,
+      "seed": 2,
+      "n_wafers": 0,
+      "actions": 1,
+      "submitted": true,
+      "recipe": {
+        "implant_dose": 1000000000000.0,
+        "implant_energy": 20.0,
+        "anneal_temp": 980.0,
+        "anneal_time": 90.0,
+        "ox_temp": 900.0,
+        "ox_time": 60.0,
+        "gate_length": 0.47
+      },
+      "lot_yield": 0.0,
+      "budget_spent": 0.0,
+      "score": 0.0,
+      "fail_breakdown": {
+        "vt_low": 1.0,
+        "vt_high": 0.0,
+        "ion_low": 0.0,
+        "ioff_high": 1.0,
+        "tox_thin": 0.0
+      },
+      "seconds": 0.04
+    },
+    {
+      "policy": "open_loop_physics",
+      "level": 1,
+      "seed": 0,
+      "n_wafers": 0,
+      "actions": 1,
+      "submitted": true,
+      "recipe": {
+        "implant_dose": 4213683355666.777,
+        "implant_energy": 20.0,
+        "anneal_temp": 980.0,
+        "anneal_time": 90.0,
+        "ox_temp": 900.0,
+        "ox_time": 60.0,
+        "gate_length": 0.47
+      },
+      "lot_yield": 1.0,
+      "budget_spent": 0.0,
+      "score": 1.0,
+      "fail_breakdown": {
+        "vt_low": 0.0,
+        "vt_high": 0.0,
+        "ion_low": 0.0,
+        "ioff_high": 0.0,
+        "tox_thin": 0.0
+      },
+      "seconds": 12.8
+    },
+    {
+      "policy": "open_loop_physics",
+      "level": 1,
+      "seed": 1,
+      "n_wafers": 0,
+      "actions": 1,
+      "submitted": true,
+      "recipe": {
+        "implant_dose": 4235483547003.934,
+        "implant_energy": 20.0,
+        "anneal_temp": 980.0,
+        "anneal_time": 90.0,
+        "ox_temp": 900.0,
+        "ox_time": 60.0,
+        "gate_length": 0.47
+      },
+      "lot_yield": 1.0,
+      "budget_spent": 0.0,
+      "score": 1.0,
+      "fail_breakdown": {
+        "vt_low": 0.0,
+        "vt_high": 0.0,
+        "ion_low": 0.0,
+        "ioff_high": 0.0,
+        "tox_thin": 0.0
+      },
+      "seconds": 12.82
+    },
+    {
+      "policy": "open_loop_physics",
+      "level": 1,
+      "seed": 2,
+      "n_wafers": 0,
+      "actions": 1,
+      "submitted": true,
+      "recipe": {
+        "implant_dose": 4237839707837.333,
+        "implant_energy": 20.0,
+        "anneal_temp": 980.0,
+        "anneal_time": 90.0,
+        "ox_temp": 900.0,
+        "ox_time": 60.0,
+        "gate_length": 0.47
+      },
+      "lot_yield": 1.0,
+      "budget_spent": 0.0,
+      "score": 1.0,
+      "fail_breakdown": {
+        "vt_low": 0.0,
+        "vt_high": 0.0,
+        "ion_low": 0.0,
+        "ioff_high": 0.0,
+        "tox_thin": 0.0
+      },
+      "seconds": 12.5
+    },
+    {
+      "policy": "reference",
+      "level": 1,
+      "seed": 0,
+      "n_wafers": 0,
+      "actions": 1,
+      "submitted": true,
+      "recipe": {
+        "implant_dose": 4213683355666.777,
+        "implant_energy": 20.0,
+        "anneal_temp": 980.0,
+        "anneal_time": 90.0,
+        "ox_temp": 900.0,
+        "ox_time": 60.0,
+        "gate_length": 0.47
+      },
+      "lot_yield": 1.0,
+      "budget_spent": 0.0,
+      "score": 1.0,
+      "fail_breakdown": {
+        "vt_low": 0.0,
+        "vt_high": 0.0,
+        "ion_low": 0.0,
+        "ioff_high": 0.0,
+        "tox_thin": 0.0
+      },
+      "seconds": 12.41
+    },
+    {
+      "policy": "reference",
+      "level": 1,
+      "seed": 1,
+      "n_wafers": 0,
+      "actions": 1,
+      "submitted": true,
+      "recipe": {
+        "implant_dose": 4235483547003.934,
+        "implant_energy": 20.0,
+        "anneal_temp": 980.0,
+        "anneal_time": 90.0,
+        "ox_temp": 900.0,
+        "ox_time": 60.0,
+        "gate_length": 0.47
+      },
+      "lot_yield": 1.0,
+      "budget_spent": 0.0,
+      "score": 1.0,
+      "fail_breakdown": {
+        "vt_low": 0.0,
+        "vt_high": 0.0,
+        "ion_low": 0.0,
+        "ioff_high": 0.0,
+        "tox_thin": 0.0
+      },
+      "seconds": 12.29
+    },
+    {
+      "policy": "reference",
+      "level": 1,
+      "seed": 2,
+      "n_wafers": 0,
+      "actions": 1,
+      "submitted": true,
+      "recipe": {
+        "implant_dose": 4237839707837.333,
+        "implant_energy": 20.0,
+        "anneal_temp": 980.0,
+        "anneal_time": 90.0,
+        "ox_temp": 900.0,
+        "ox_time": 60.0,
+        "gate_length": 0.47
+      },
+      "lot_yield": 1.0,
+      "budget_spent": 0.0,
+      "score": 1.0,
+      "fail_breakdown": {
+        "vt_low": 0.0,
+        "vt_high": 0.0,
+        "ion_low": 0.0,
+        "ioff_high": 0.0,
+        "tox_thin": 0.0
+      },
+      "seconds": 12.15
+    },
+    {
+      "policy": "do_nothing",
+      "level": 2,
+      "seed": 0,
+      "n_wafers": 0,
+      "actions": 0,
+      "submitted": false,
+      "recipe": null,
+      "lot_yield": 0.0,
+      "budget_spent": 0.0,
+      "score": 0.0,
+      "fail_breakdown": {},
+      "seconds": 0.0
+    },
+    {
+      "policy": "do_nothing",
+      "level": 2,
+      "seed": 1,
+      "n_wafers": 0,
+      "actions": 0,
+      "submitted": false,
+      "recipe": null,
+      "lot_yield": 0.0,
+      "budget_spent": 0.0,
+      "score": 0.0,
+      "fail_breakdown": {},
+      "seconds": 0.0
+    },
+    {
+      "policy": "do_nothing",
+      "level": 2,
+      "seed": 2,
+      "n_wafers": 0,
+      "actions": 0,
+      "submitted": false,
+      "recipe": null,
+      "lot_yield": 0.0,
+      "budget_spent": 0.0,
+      "score": 0.0,
+      "fail_breakdown": {},
+      "seconds": 0.0
+    },
+    {
+      "policy": "stop_early",
+      "level": 2,
+      "seed": 0,
+      "n_wafers": 0,
+      "actions": 1,
+      "submitted": true,
+      "recipe": {
+        "implant_dose": 1000000000000.0,
+        "implant_energy": 20.0,
+        "anneal_temp": 950.0,
+        "anneal_time": 30.0,
+        "ox_temp": 900.0,
+        "ox_time": 45.0,
+        "gate_length": 1.0
+      },
+      "lot_yield": 0.0,
+      "budget_spent": 0.0,
+      "score": 0.0,
+      "fail_breakdown": {
+        "vt_low": 1.0,
+        "vt_high": 0.0,
+        "ion_low": 0.0,
+        "ioff_high": 1.0,
+        "tox_thin": 0.0
+      },
+      "seconds": 0.03
+    },
+    {
+      "policy": "stop_early",
+      "level": 2,
+      "seed": 1,
+      "n_wafers": 0,
+      "actions": 1,
+      "submitted": true,
+      "recipe": {
+        "implant_dose": 1000000000000.0,
+        "implant_energy": 20.0,
+        "anneal_temp": 950.0,
+        "anneal_time": 30.0,
+        "ox_temp": 900.0,
+        "ox_time": 45.0,
+        "gate_length": 1.0
+      },
+      "lot_yield": 0.0,
+      "budget_spent": 0.0,
+      "score": 0.0,
+      "fail_breakdown": {
+        "vt_low": 1.0,
+        "vt_high": 0.0,
+        "ion_low": 0.0,
+        "ioff_high": 1.0,
+        "tox_thin": 0.0
+      },
+      "seconds": 0.03
+    },
+    {
+      "policy": "stop_early",
+      "level": 2,
+      "seed": 2,
+      "n_wafers": 0,
+      "actions": 1,
+      "submitted": true,
+      "recipe": {
+        "implant_dose": 1000000000000.0,
+        "implant_energy": 20.0,
+        "anneal_temp": 950.0,
+        "anneal_time": 30.0,
+        "ox_temp": 900.0,
+        "ox_time": 45.0,
+        "gate_length": 1.0
+      },
+      "lot_yield": 0.0,
+      "budget_spent": 0.0,
+      "score": 0.0,
+      "fail_breakdown": {
+        "vt_low": 1.0,
+        "vt_high": 0.0,
+        "ion_low": 0.0,
+        "ioff_high": 1.0,
+        "tox_thin": 0.0
+      },
+      "seconds": 0.03
+    },
+    {
+      "policy": "open_loop_physics",
+      "level": 2,
+      "seed": 0,
+      "n_wafers": 0,
+      "actions": 1,
+      "submitted": true,
+      "recipe": {
+        "implant_dose": 2844402128416.7207,
+        "implant_energy": 9.98037034821061,
+        "anneal_temp": 802.5326165684498,
+        "anneal_time": 22.898390127500726,
+        "ox_temp": 872.1467737649937,
+        "ox_time": 68.35905521946673,
+        "gate_length": 0.6230975383335686
+      },
+      "lot_yield": 0.9990196078431373,
+      "budget_spent": 0.0,
+      "score": 0.9990196078431373,
+      "fail_breakdown": {
+        "vt_low": 0.000980392156862745,
+        "vt_high": 0.0,
+        "ion_low": 0.0,
+        "ioff_high": 0.0,
+        "tox_thin": 0.0
+      },
+      "seconds": 13.08
+    },
+    {
+      "policy": "open_loop_physics",
+      "level": 2,
+      "seed": 1,
+      "n_wafers": 0,
+      "actions": 1,
+      "submitted": true,
+      "recipe": {
+        "implant_dose": 4328113170177.0747,
+        "implant_energy": 8.112235388477794,
+        "anneal_temp": 963.3067661913801,
+        "anneal_time": 60.23027884918898,
+        "ox_temp": 835.6506581697739,
+        "ox_time": 129.7439209227716,
+        "gate_length": 0.5674111261690036
+      },
+      "lot_yield": 0.9990196078431373,
+      "budget_spent": 0.0,
+      "score": 0.9990196078431373,
+      "fail_breakdown": {
+        "vt_low": 0.000980392156862745,
+        "vt_high": 0.0,
+        "ion_low": 0.0,
+        "ioff_high": 0.0,
+        "tox_thin": 0.0
+      },
+      "seconds": 12.48
+    },
+    {
+      "policy": "open_loop_physics",
+      "level": 2,
+      "seed": 2,
+      "n_wafers": 0,
+      "actions": 1,
+      "submitted": true,
+      "recipe": {
+        "implant_dose": 3499765530122.1714,
+        "implant_energy": 10.464923595202885,
+        "anneal_temp": 904.2278054463682,
+        "anneal_time": 79.3533845229531,
+        "ox_temp": 822.9768250073084,
+        "ox_time": 161.00546174988557,
+        "gate_length": 0.5395672653378378
+      },
+      "lot_yield": 1.0,
+      "budget_spent": 0.0,
+      "score": 1.0,
+      "fail_breakdown": {
+        "vt_low": 0.0,
+        "vt_high": 0.0,
+        "ion_low": 0.0,
+        "ioff_high": 0.0,
+        "tox_thin": 0.0
+      },
+      "seconds": 12.55
+    },
+    {
+      "policy": "reference",
+      "level": 2,
+      "seed": 0,
+      "n_wafers": 0,
+      "actions": 1,
+      "submitted": true,
+      "recipe": {
+        "implant_dose": 2844402128416.7207,
+        "implant_energy": 9.98037034821061,
+        "anneal_temp": 802.5326165684498,
+        "anneal_time": 22.898390127500726,
+        "ox_temp": 872.1467737649937,
+        "ox_time": 68.35905521946673,
+        "gate_length": 0.6230975383335686
+      },
+      "lot_yield": 0.9990196078431373,
+      "budget_spent": 0.0,
+      "score": 0.9990196078431373,
+      "fail_breakdown": {
+        "vt_low": 0.000980392156862745,
+        "vt_high": 0.0,
+        "ion_low": 0.0,
+        "ioff_high": 0.0,
+        "tox_thin": 0.0
+      },
+      "seconds": 13.13
+    },
+    {
+      "policy": "reference",
+      "level": 2,
+      "seed": 1,
+      "n_wafers": 0,
+      "actions": 1,
+      "submitted": true,
+      "recipe": {
+        "implant_dose": 4328113170177.0747,
+        "implant_energy": 8.112235388477794,
+        "anneal_temp": 963.3067661913801,
+        "anneal_time": 60.23027884918898,
+        "ox_temp": 835.6506581697739,
+        "ox_time": 129.7439209227716,
+        "gate_length": 0.5674111261690036
+      },
+      "lot_yield": 0.9990196078431373,
+      "budget_spent": 0.0,
+      "score": 0.9990196078431373,
+      "fail_breakdown": {
+        "vt_low": 0.000980392156862745,
+        "vt_high": 0.0,
+        "ion_low": 0.0,
+        "ioff_high": 0.0,
+        "tox_thin": 0.0
+      },
+      "seconds": 12.48
+    },
+    {
+      "policy": "reference",
+      "level": 2,
+      "seed": 2,
+      "n_wafers": 0,
+      "actions": 1,
+      "submitted": true,
+      "recipe": {
+        "implant_dose": 3499765530122.1714,
+        "implant_energy": 10.464923595202885,
+        "anneal_temp": 904.2278054463682,
+        "anneal_time": 79.3533845229531,
+        "ox_temp": 822.9768250073084,
+        "ox_time": 161.00546174988557,
+        "gate_length": 0.5395672653378378
+      },
+      "lot_yield": 1.0,
+      "budget_spent": 0.0,
+      "score": 1.0,
+      "fail_breakdown": {
+        "vt_low": 0.0,
+        "vt_high": 0.0,
+        "ion_low": 0.0,
+        "ioff_high": 0.0,
+        "tox_thin": 0.0
+      },
+      "seconds": 12.79
+    },
+    {
+      "policy": "do_nothing",
+      "level": 3,
+      "seed": 0,
+      "n_wafers": 0,
+      "actions": 0,
+      "submitted": false,
+      "recipe": null,
+      "lot_yield": 0.0,
+      "budget_spent": 0.0,
+      "score": 0.0,
+      "fail_breakdown": {},
+      "seconds": 0.0
+    },
+    {
+      "policy": "do_nothing",
+      "level": 3,
+      "seed": 1,
+      "n_wafers": 0,
+      "actions": 0,
+      "submitted": false,
+      "recipe": null,
+      "lot_yield": 0.0,
+      "budget_spent": 0.0,
+      "score": 0.0,
+      "fail_breakdown": {},
+      "seconds": 0.0
+    },
+    {
+      "policy": "do_nothing",
+      "level": 3,
+      "seed": 2,
+      "n_wafers": 0,
+      "actions": 0,
+      "submitted": false,
+      "recipe": null,
+      "lot_yield": 0.0,
+      "budget_spent": 0.0,
+      "score": 0.0,
+      "fail_breakdown": {},
+      "seconds": 0.0
+    },
+    {
+      "policy": "stop_early",
+      "level": 3,
+      "seed": 0,
+      "n_wafers": 0,
+      "actions": 1,
+      "submitted": true,
+      "recipe": {
+        "implant_dose": 1000000000000.0,
+        "implant_energy": 20.0,
+        "anneal_temp": 950.0,
+        "anneal_time": 30.0,
+        "ox_temp": 900.0,
+        "ox_time": 45.0,
+        "gate_length": 1.0
+      },
+      "lot_yield": 0.0,
+      "budget_spent": 0.0,
+      "score": 0.0,
+      "fail_breakdown": {
+        "vt_low": 1.0,
+        "vt_high": 0.0,
+        "ion_low": 0.9941176470588236,
+        "ioff_high": 1.0,
+        "tox_thin": 0.0
+      },
+      "seconds": 0.04
+    },
+    {
+      "policy": "stop_early",
+      "level": 3,
+      "seed": 1,
+      "n_wafers": 0,
+      "actions": 1,
+      "submitted": true,
+      "recipe": {
+        "implant_dose": 1000000000000.0,
+        "implant_energy": 20.0,
+        "anneal_temp": 950.0,
+        "anneal_time": 30.0,
+        "ox_temp": 900.0,
+        "ox_time": 45.0,
+        "gate_length": 1.0
+      },
+      "lot_yield": 0.0,
+      "budget_spent": 0.0,
+      "score": 0.0,
+      "fail_breakdown": {
+        "vt_low": 1.0,
+        "vt_high": 0.0,
+        "ion_low": 0.5980392156862745,
+        "ioff_high": 1.0,
+        "tox_thin": 0.0
+      },
+      "seconds": 0.04
+    },
+    {
+      "policy": "stop_early",
+      "level": 3,
+      "seed": 2,
+      "n_wafers": 0,
+      "actions": 1,
+      "submitted": true,
+      "recipe": {
+        "implant_dose": 1000000000000.0,
+        "implant_energy": 20.0,
+        "anneal_temp": 950.0,
+        "anneal_time": 30.0,
+        "ox_temp": 900.0,
+        "ox_time": 45.0,
+        "gate_length": 1.0
+      },
+      "lot_yield": 0.0,
+      "budget_spent": 0.0,
+      "score": 0.0,
+      "fail_breakdown": {
+        "vt_low": 1.0,
+        "vt_high": 0.0,
+        "ion_low": 0.0,
+        "ioff_high": 1.0,
+        "tox_thin": 0.0
+      },
+      "seconds": 0.04
+    },
+    {
+      "policy": "open_loop_physics",
+      "level": 3,
+      "seed": 0,
+      "n_wafers": 0,
+      "actions": 1,
+      "submitted": true,
+      "recipe": {
+        "implant_dose": 2844402128416.7207,
+        "implant_energy": 9.98037034821061,
+        "anneal_temp": 802.5326165684498,
+        "anneal_time": 22.898390127500726,
+        "ox_temp": 872.1467737649937,
+        "ox_time": 68.35905521946673,
+        "gate_length": 0.6230975383335686
+      },
+      "lot_yield": 0.0,
+      "budget_spent": 0.0,
+      "score": 0.0,
+      "fail_breakdown": {
+        "vt_low": 0.0,
+        "vt_high": 1.0,
+        "ion_low": 0.43823529411764706,
+        "ioff_high": 0.0,
+        "tox_thin": 0.0
+      },
+      "seconds": 14.05
+    },
+    {
+      "policy": "open_loop_physics",
+      "level": 3,
+      "seed": 1,
+      "n_wafers": 0,
+      "actions": 1,
+      "submitted": true,
+      "recipe": {
+        "implant_dose": 4328113170177.0747,
+        "implant_energy": 8.112235388477794,
+        "anneal_temp": 963.3067661913801,
+        "anneal_time": 60.23027884918898,
+        "ox_temp": 835.6506581697739,
+        "ox_time": 129.7439209227716,
+        "gate_length": 0.5674111261690036
+      },
+      "lot_yield": 0.9882352941176471,
+      "budget_spent": 0.0,
+      "score": 0.9882352941176471,
+      "fail_breakdown": {
+        "vt_low": 0.0,
+        "vt_high": 0.011764705882352941,
+        "ion_low": 0.0,
+        "ioff_high": 0.0,
+        "tox_thin": 0.0
+      },
+      "seconds": 12.54
+    },
+    {
+      "policy": "open_loop_physics",
+      "level": 3,
+      "seed": 2,
+      "n_wafers": 0,
+      "actions": 1,
+      "submitted": true,
+      "recipe": {
+        "implant_dose": 3499765530122.1714,
+        "implant_energy": 10.464923595202885,
+        "anneal_temp": 904.2278054463682,
+        "anneal_time": 79.3533845229531,
+        "ox_temp": 822.9768250073084,
+        "ox_time": 161.00546174988557,
+        "gate_length": 0.5395672653378378
+      },
+      "lot_yield": 0.0,
+      "budget_spent": 0.0,
+      "score": 0.0,
+      "fail_breakdown": {
+        "vt_low": 1.0,
+        "vt_high": 0.0,
+        "ion_low": 0.0,
+        "ioff_high": 0.10784313725490197,
+        "tox_thin": 1.0
+      },
+      "seconds": 13.29
+    },
+    {
+      "policy": "reference",
+      "level": 3,
+      "seed": 0,
+      "n_wafers": 3,
+      "actions": 13,
+      "submitted": true,
+      "recipe": {
+        "implant_dose": 8092257033370.059,
+        "implant_energy": 37.34003135914334,
+        "anneal_temp": 1039.5206727212994,
+        "anneal_time": 26.331061807321948,
+        "ox_temp": 930.0669712525629,
+        "ox_time": 25.345768679614,
+        "gate_length": 0.5049903236251804
+      },
+      "lot_yield": 1.0,
+      "budget_spent": 3.93,
+      "score": 0.98035,
+      "fail_breakdown": {
+        "vt_low": 0.0,
+        "vt_high": 0.0,
+        "ion_low": 0.0,
+        "ioff_high": 0.0,
+        "tox_thin": 0.0
+      },
+      "seconds": 40.05
+    },
+    {
+      "policy": "reference",
+      "level": 3,
+      "seed": 1,
+      "n_wafers": 3,
+      "actions": 13,
+      "submitted": true,
+      "recipe": {
+        "implant_dose": 6356540268496.232,
+        "implant_energy": 17.486372753647906,
+        "anneal_temp": 942.1988216480111,
+        "anneal_time": 19.176184847435554,
+        "ox_temp": 988.4555536911804,
+        "ox_time": 8.892031421866696,
+        "gate_length": 0.3543848500618787
+      },
+      "lot_yield": 0.9990196078431373,
+      "budget_spent": 3.93,
+      "score": 0.9793696078431373,
+      "fail_breakdown": {
+        "vt_low": 0.0,
+        "vt_high": 0.000980392156862745,
+        "ion_low": 0.0,
+        "ioff_high": 0.0,
+        "tox_thin": 0.0
+      },
+      "seconds": 39.64
+    },
+    {
+      "policy": "reference",
+      "level": 3,
+      "seed": 2,
+      "n_wafers": 3,
+      "actions": 13,
+      "submitted": true,
+      "recipe": {
+        "implant_dose": 2705340706474.73,
+        "implant_energy": 5.121470020362271,
+        "anneal_temp": 924.1697134722031,
+        "anneal_time": 46.344938115749976,
+        "ox_temp": 1021.056531486159,
+        "ox_time": 9.629997106935472,
+        "gate_length": 0.5337913074304824
+      },
+      "lot_yield": 1.0,
+      "budget_spent": 3.93,
+      "score": 0.98035,
+      "fail_breakdown": {
+        "vt_low": 0.0,
+        "vt_high": 0.0,
+        "ion_low": 0.0,
+        "ioff_high": 0.0,
+        "tox_thin": 0.0
+      },
+      "seconds": 40.47
+    }
+  ]
+}
