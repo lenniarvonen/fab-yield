@@ -1,0 +1,398 @@
+<title>Fab Yield Process Map</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a fab "traveler" (route sheet). Route steps run top to bottom, each a row:
+   step no. | what happens + equations | worked example on the default recipe. */
+:root {
+  --bg: #f6f7f9;
+  --panel: #ffffff;
+  --ink: #14161c;
+  --ink-2: #4a4f5c;
+  --muted: #7d8291;
+  --rule: #dfe2e8;
+  --accent: #4338ca;      /* knobs the agent sets */
+  --accent-soft: #e8e7fb;
+  --hidden: #a15c00;      /* hidden per-seed fab state */
+  --hidden-soft: #fbefdc;
+  --noise: #9b2c5a;       /* random variation */
+  --noise-soft: #f8e6ee;
+  --out: #0f6b5c;         /* outputs / measured */
+  --out-soft: #e0f2ee;
+  --fail: #b42318;
+  --code-bg: #f1f2f6;
+  --f-head: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #111318; --panel: #181b22; --ink: #eceef3; --ink-2: #b7bcc9; --muted: #8a90a0; --rule: #2a2e38;
+  --accent: #a5a0ff; --accent-soft: #26244a; --hidden: #f0b45a; --hidden-soft: #3a2b14;
+  --noise: #f08cb4; --noise-soft: #3b1d2a; --out: #5fd3bd; --out-soft: #143029; --fail: #ff7a6e; --code-bg: #20242d;
+  color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #111318; --panel: #181b22; --ink: #eceef3; --ink-2: #b7bcc9; --muted: #8a90a0; --rule: #2a2e38;
+  --accent: #a5a0ff; --accent-soft: #26244a; --hidden: #f0b45a; --hidden-soft: #3a2b14;
+  --noise: #f08cb4; --noise-soft: #3b1d2a; --out: #5fd3bd; --out-soft: #143029; --fail: #ff7a6e; --code-bg: #20242d;
+  color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.55; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-block: 40px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--f-head); text-wrap: balance; margin: 0; letter-spacing: 0.005em; }
+h1 { font-size: clamp(30px, 4.4vw, 44px); font-weight: 700; line-height: 1.08; }
+h2 { font-size: 24px; font-weight: 600; margin-bottom: 14px; }
+h3 { font-size: 19px; font-weight: 600; }
+p { margin: 0; }
+.lede { color: var(--ink-2); max-width: 68ch; margin-top: 12px; font-size: 16px; }
+.eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+code, .mono { font-family: var(--f-mono); font-size: 0.88em; }
+.eq { font-family: var(--f-mono); font-size: 13px; background: var(--code-bg); border-radius: 6px; padding: 10px 12px;
+  white-space: pre; overflow-x: auto; line-height: 1.6; color: var(--ink); }
+
+/* legend chips */
+.legend { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 22px; font-size: 13px; color: var(--ink-2); }
+.tag { display: inline-flex; align-items: center; gap: 6px; font-family: var(--f-mono); font-size: 12px;
+  padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+.tag::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.t-knob { color: var(--accent); background: var(--accent-soft); }
+.t-hidden { color: var(--hidden); background: var(--hidden-soft); }
+.t-noise { color: var(--noise); background: var(--noise-soft); }
+.t-out { color: var(--out); background: var(--out-soft); }
+
+/* overview strip */
+.strip-wrap { overflow-x: auto; margin-top: 28px; }
+.strip { display: grid; grid-template-columns: repeat(5, minmax(150px, 1fr)); gap: 0; min-width: 760px; }
+.lane { border-top: 3px solid var(--rule); padding: 12px 14px 4px 0; position: relative; }
+.lane .eyebrow { display: block; margin-bottom: 6px; }
+.lane b { font-family: var(--f-head); font-size: 17px; font-weight: 600; display: block; }
+.lane span.small { font-size: 13px; color: var(--ink-2); display: block; margin-top: 2px; }
+.lane.l1 { border-color: var(--accent); } .lane.l2 { border-color: var(--ink-2); } .lane.l3 { border-color: var(--noise); }
+.lane.l4 { border-color: var(--out); } .lane.l5 { border-color: var(--ink); }
+.lane:not(:last-child)::after { content: "→"; position: absolute; right: 2px; top: -15px; color: var(--muted); font-size: 16px; background: var(--bg); padding: 0 2px; }
+
+section { margin-top: 48px; }
+.layer-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; border-bottom: 1px solid var(--rule); padding-bottom: 8px; margin-bottom: 4px; }
+.layer-head .eyebrow { color: var(--ink-2); }
+
+/* route steps */
+.step { display: grid; grid-template-columns: 76px minmax(0, 1fr) 270px; gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--rule); }
+.stepno { font-family: var(--f-mono); font-size: 13px; color: var(--muted); padding-top: 4px; }
+.stepno strong { display: block; font-family: var(--f-head); font-size: 26px; color: var(--ink); font-weight: 600; line-height: 1; }
+.body { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.body .what { color: var(--ink-2); max-width: 70ch; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.ex { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 12px 14px; font-size: 13px; align-self: start; }
+.ex .eyebrow { font-size: 11px; display: block; margin-bottom: 6px; }
+.ex dl { display: grid; grid-template-columns: auto auto; gap: 3px 12px; margin: 0; font-variant-numeric: tabular-nums; }
+.ex dt { color: var(--ink-2); } .ex dd { margin: 0; font-family: var(--f-mono); text-align: right; }
+.ex .bad { color: var(--fail); font-weight: 500; }
+.ex .good { color: var(--out); font-weight: 500; }
+.note { font-size: 13px; color: var(--muted); }
+
+/* tables */
+.tbl-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+td.mono { white-space: nowrap; }
+
+/* agent loop */
+.loop { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 8px; }
+.loop .card { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 14px; display: flex; flex-direction: column; gap: 6px; }
+.loop .card code { color: var(--accent); font-size: 13px; }
+.loop .card p { font-size: 14px; color: var(--ink-2); }
+.cost { font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+.score { margin-top: 18px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+
+@media (max-width: 860px) {
+  .step { grid-template-columns: 56px minmax(0, 1fr); }
+  .ex { grid-column: 2; }
+  .loop { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .score { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .step { grid-template-columns: 1fr; gap: 10px; }
+  .ex { grid-column: 1; }
+  .stepno strong { display: inline; margin-right: 8px; }
+  .loop { grid-template-columns: 1fr; }
+}
+</style>
+
+<div class="wrap">
+  <span class="eyebrow">Fab Yield · simulation route sheet</span>
+  <h1>From a recipe to a score</h1>
+  <p class="lede">Every number the agent sees comes out of this route, in order. Each step lists what goes in, the equation the simulator evaluates, and what the default recipe produces at that step. The default recipe fails spec, which is where every episode starts.</p>
+
+  <div class="legend" aria-label="Legend">
+    <span class="tag t-knob">knob the agent sets</span>
+    <span class="tag t-hidden">hidden fab state (level 3)</span>
+    <span class="tag t-noise">random variation</span>
+    <span class="tag t-out">output / measured</span>
+  </div>
+
+  <div class="strip-wrap" role="img" aria-label="Five simulation layers in order: recipe, process, device, wafer variation, metrology and score">
+    <div class="strip">
+      <div class="lane l1"><span class="eyebrow">Input</span><b>Recipe</b><span class="small">7 knobs from the agent</span></div>
+      <div class="lane l2"><span class="eyebrow">Layer 1</span><b>Process</b><span class="small">implant → anneal → oxidation → gate</span></div>
+      <div class="lane l3"><span class="eyebrow">Layer 3</span><b>Variation</b><span class="small">offsets, run-to-run, die-to-die (applied inside every step)</span></div>
+      <div class="lane l4"><span class="eyebrow">Layer 2</span><b>Device</b><span class="small">Vt, Ion, Ioff per die</span></div>
+      <div class="lane l5"><span class="eyebrow">Layer 4</span><b>Metrology &amp; score</b><span class="small">noisy data, or the production lot</span></div>
+    </div>
+  </div>
+
+  <!-- ===================== INPUTS ===================== -->
+  <section>
+    <div class="layer-head"><h2>Inputs</h2><span class="eyebrow">set before step 10</span></div>
+
+    <div class="step">
+      <div class="stepno"><strong>00</strong>recipe</div>
+      <div class="body">
+        <h3>The agent's recipe</h3>
+        <p class="what">Seven numbers, each checked against its range. Out-of-range, NaN, text or unknown knobs are rejected at no cost. In level 1 only the dose is free; the other six are frozen.</p>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>Knob</th><th>Range</th><th>Used in step</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">implant_dose</td><td class="mono">1e11 – 1e13 cm⁻²</td><td>10</td></tr>
+            <tr><td class="mono">implant_energy</td><td class="mono">5 – 100 keV</td><td>10</td></tr>
+            <tr><td class="mono">anneal_temp</td><td class="mono">800 – 1100 °C</td><td>20</td></tr>
+            <tr><td class="mono">anneal_time</td><td class="mono">1 – 120 min</td><td>20</td></tr>
+            <tr><td class="mono">ox_temp</td><td class="mono">800 – 1050 °C</td><td>30 (and 20's thermal budget)</td></tr>
+            <tr><td class="mono">ox_time</td><td class="mono">5 – 180 min</td><td>30 (and 20's thermal budget)</td></tr>
+            <tr><td class="mono">gate_length</td><td class="mono">0.25 – 2.0 µm</td><td>50</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="ex"><span class="eyebrow">Default recipe</span>
+        <dl><dt>dose</dt><dd>1.0e12</dd><dt>energy</dt><dd>20 keV</dd><dt>anneal</dt><dd>950 °C, 30 min</dd><dt>oxidation</dt><dd>900 °C, 45 min</dd><dt>gate length</dt><dd>1.0 µm</dd></dl>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="stepno"><strong>01</strong>seed</div>
+      <div class="body">
+        <h3>The fab's hidden state</h3>
+        <p class="what">Drawn once from the seed and fixed for the whole episode, including the production lot. The agent never sees it. In levels 1 and 2 it is "calibrated": every offset is zero.</p>
+        <div class="tags"><span class="tag t-hidden">anneal offset ±8–20 °C</span><span class="tag t-hidden">oxidation offset ±5–12 °C</span><span class="tag t-hidden">dose factor 0.90–0.96 or 1.04–1.10</span><span class="tag t-hidden">oxide radial gradient g = 0–4 %</span></div>
+        <p class="note">The docs state that these offsets exist in level 3, and their bounds. Only the values are hidden.</p>
+      </div>
+      <div class="ex"><span class="eyebrow">Example: level 3, seed 0</span>
+        <dl><dt>anneal offset</dt><dd>−13.3 °C</dd><dt>oxidation offset</dt><dd>+11.8 °C</dd><dt>dose factor</dt><dd>×1.090</dd><dt>radial g</dt><dd>1.0 %</dd></dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROCESS ===================== -->
+  <section>
+    <div class="layer-head"><h2>Layer 1 · Process</h2><span class="eyebrow">recipe → physical structure, per die</span></div>
+
+    <div class="step">
+      <div class="stepno"><strong>10</strong>implant</div>
+      <div class="body">
+        <h3>Vt-adjust boron implant</h3>
+        <p class="what">Boron ions are shot into the p-type substrate (N_sub = 1e16 cm⁻³). Energy sets how deep they stop, dose sets how many. The result is a Gaussian, reflected at the surface so the whole dose stays in silicon.</p>
+        <div class="tags"><span class="tag t-knob">implant_dose</span><span class="tag t-knob">implant_energy</span><span class="tag t-hidden">× dose factor</span><span class="tag t-noise">dose ±1 % per wafer</span><span class="tag t-noise">dose ±1.5 % per die</span></div>
+        <div class="eq">delivered dose Q = dose × factor × (1 + 1% run) × (1 + 1.5% die)
+Rp, ΔRp = Gibbons range table (interpolated in energy)
+N(x) = N_sub + Q/(√(2π)·σ) · [e^(−(x−Rp)²/2σ²) + e^(−(x+Rp)²/2σ²)],  σ = ΔRp (as implanted)</div>
+      </div>
+      <div class="ex"><span class="eyebrow">Default recipe</span>
+        <dl><dt>Rp (depth)</dt><dd>66.2 nm</dd><dt>ΔRp (spread)</dt><dd>28.3 nm</dd><dt>dose</dt><dd>1.0e12 cm⁻²</dd></dl>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="stepno"><strong>20</strong>anneal</div>
+      <div class="body">
+        <h3>Activation anneal</h3>
+        <p class="what">The wafer sits in a furnace and the boron diffuses. Diffusivity is Arrhenius, so it is very steep in temperature: about 25–30 % faster per +10 °C. The furnace runs at setpoint plus the hidden offset plus a ±1 °C run-to-run wobble.</p>
+        <div class="tags"><span class="tag t-knob">anneal_temp</span><span class="tag t-knob">anneal_time</span><span class="tag t-hidden">+ anneal offset</span><span class="tag t-noise">±1 °C per wafer</span></div>
+        <div class="eq">T_real = anneal_temp + offset + N(0, 1 °C)
+D(T)   = 0.76 cm²/s · exp(−3.46 eV / kT)
+Dt_anneal = D(T_real) · t_anneal</div>
+      </div>
+      <div class="ex"><span class="eyebrow">Default recipe</span>
+        <dl><dt>D(950 °C)</dt><dd>4.2e-15 cm²/s</dd><dt>Dt anneal</dt><dd>7.6e-12 cm²</dd></dl>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="stepno"><strong>30</strong>oxidation</div>
+      <div class="body">
+        <h3>Dry gate oxidation</h3>
+        <p class="what">Grows the gate oxide by the Deal-Grove model on (100) silicon, starting from 1.5 nm of native oxide. This step does three things at once: it sets the oxide thickness, it adds more thermal budget (the boron keeps diffusing), and it eats 0.44 nm of silicon per nm grown, which removes the top of the boron profile.</p>
+        <div class="tags"><span class="tag t-knob">ox_temp</span><span class="tag t-knob">ox_time</span><span class="tag t-hidden">+ oxidation offset</span><span class="tag t-hidden">radial g</span><span class="tag t-noise">±1 °C per wafer</span><span class="tag t-noise">t_ox ±1 % per die</span></div>
+        <div class="eq">x² + A·x = B·(t + τ)       B = 772 µm²/h · e^(−1.23 eV/kT)
+                            B/A = 6.23e6/1.68 µm/h · e^(−2.00 eV/kT)
+t_ox(die) = x · (1 + g·r²) · (1 + 1% die)       r = radius / 50 mm
+Dt_ox = D(T_ox,real) · t_ox_time          Si consumed = 0.44 · (t_ox − 1.5 nm)</div>
+      </div>
+      <div class="ex"><span class="eyebrow">Default recipe</span>
+        <dl><dt>t_ox</dt><dd>8.45 nm</dd><dt>Si consumed</dt><dd>3.1 nm</dd><dt>Dt oxidation</dt><dd>2.8e-12 cm²</dd><dt>share of total Dt</dt><dd>27 %</dd></dl>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="stepno"><strong>40</strong>profile</div>
+      <div class="body">
+        <h3>Final channel doping profile</h3>
+        <p class="what">A Gaussian stays Gaussian under constant diffusion, so the two heat steps simply widen it. The profile is then measured from the new silicon surface, below the consumed layer. This N(x) is what the transistor sees.</p>
+        <div class="eq">σ² = ΔRp² + 2·(Dt_anneal + Dt_ox)
+N(x) on a 0 – 1 µm grid (801 points), x measured below the Si/SiO₂ interface</div>
+        <p class="note">The coupling lives here: the oxidation knobs change both t_ox (step 30) and σ (this step), so they move Vt in two directions at once.</p>
+      </div>
+      <div class="ex"><span class="eyebrow">Default recipe</span>
+        <dl><dt>σ after heat</dt><dd>53.7 nm</dd><dt>peak depth</dt><dd>≈ 63 nm</dd></dl>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="stepno"><strong>50</strong>gate</div>
+      <div class="body">
+        <h3>n+ poly gate patterning</h3>
+        <p class="what">The gate is printed at the drawn length. Lithography and etch make it slightly longer at the wafer edge and add random die-to-die error. Fixed oxide charge also varies per die.</p>
+        <div class="tags"><span class="tag t-knob">gate_length</span><span class="tag t-noise">L ±0.02 µm per die</span><span class="tag t-noise">Q_f ±1e10 cm⁻² per die</span></div>
+        <div class="eq">L(die) = gate_length + 0.02 µm · r² + N(0, 0.02 µm)
+Q_f(die) = 5e10 + N(0, 1e10)  q/cm²</div>
+      </div>
+      <div class="ex"><span class="eyebrow">Default recipe</span>
+        <dl><dt>L centre / edge</dt><dd>1.00 / 1.02 µm</dd></dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== DEVICE ===================== -->
+  <section>
+    <div class="layer-head"><h2>Layer 2 · Device</h2><span class="eyebrow">structure → electrical behaviour, per die, at Vdd = 3.3 V, W = 10 µm</span></div>
+
+    <div class="step">
+      <div class="stepno"><strong>60</strong>depletion</div>
+      <div class="body">
+        <h3>Depletion region at threshold</h3>
+        <p class="what">Solves Poisson's equation numerically on the real, non-uniform profile: how deep does the depletion region reach before the surface potential hits 2φ_F? Only the boron inside that depth raises Vt. This is the integral that shortcuts like ΔVt = qQ/C_ox skip.</p>
+        <div class="eq">φ_F = (kT/q)·ln(N_sub / n_i) = 0.357 V
+find W_d such that  (q/ε_si) · ∫₀^W_d x·N(x) dx = 2φ_F
+Q_dep = q · ∫₀^W_d N(x) dx</div>
+      </div>
+      <div class="ex"><span class="eyebrow">Default recipe</span>
+        <dl><dt>W_d</dt><dd>107 nm</dd><dt>dose inside W_d</dt><dd>about half</dd></dl>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="stepno"><strong>70</strong>Vt</div>
+      <div class="body">
+        <h3>Threshold voltage, with short-channel roll-off</h3>
+        <p class="what">Long-channel Vt from flat-band voltage, surface potential and depletion charge. Short gates then lose Vt to roll-off and drain-induced barrier lowering, which grows exponentially as L approaches a few characteristic lengths.</p>
+        <div class="eq">C_ox = ε_ox / t_ox
+V_FB = −(0.56 + φ_F) − q·Q_f / C_ox
+Vt_long = V_FB + 2φ_F + Q_dep / C_ox
+l_t = √(ε_si · t_ox · W_d / ε_ox)
+ΔVt = [2(V_bi − 2φ_F) + Vdd] · [e^(−L/2l_t) + 2e^(−L/l_t)],   V_bi = 0.9 V
+Vt = Vt_long − ΔVt</div>
+      </div>
+      <div class="ex"><span class="eyebrow">Default recipe</span>
+        <dl><dt>Vt_long</dt><dd>0.125 V</dd><dt>roll-off at 1 µm</dt><dd>0.2 mV</dd><dt>Vt</dt><dd class="bad">0.124 V ✗</dd><dt>spec</dt><dd>0.50 – 0.60 V</dd></dl>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="stepno"><strong>80</strong>currents</div>
+      <div class="body">
+        <h3>Off current and on current</h3>
+        <p class="what">Off current falls one decade per subthreshold swing S of extra Vt. On current uses a velocity-saturation model with mobility that degrades in high vertical field. Short L and thin oxide raise Ion; low Vt raises both Ion and Ioff.</p>
+        <div class="eq">S    = ln10 · (kT/q) · (1 + C_dep/C_ox),   C_dep = ε_si / W_d
+Ioff = 1e-7 A · (W/L) · 10^(−Vt / S)
+μ_eff = 450 / (1 + 0.12 · (10 nm / t_ox) · (Vdd − Vt))   cm²/Vs
+E_c  = 2·v_sat / μ_eff,   v_sat = 8e6 cm/s
+Ion  = W · C_ox · v_sat · (Vdd − Vt)² / ((Vdd − Vt) + E_c · L)</div>
+      </div>
+      <div class="ex"><span class="eyebrow">Default recipe</span>
+        <dl><dt>S</dt><dd>73.7 mV/dec</dd><dt>Ion</dt><dd class="good">3.95 mA ✓</dd><dt>Ioff</dt><dd class="bad">20.6 nA ✗</dd><dt>t_ox</dt><dd class="good">8.45 nm ✓</dd><dt>spec</dt><dd>Ion ≥ 3.5 mA, Ioff ≤ 20 pA, t_ox ≥ 7 nm</dd></dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== VARIATION ===================== -->
+  <section>
+    <div class="layer-head"><h2>Layer 3 · Wafer and variation</h2><span class="eyebrow">one device → 68 dies → many wafers</span></div>
+
+    <div class="step">
+      <div class="stepno"><strong>90</strong>wafer</div>
+      <div class="body">
+        <h3>Steps 10–80 run for every die on every wafer</h3>
+        <p class="what">A 100 mm wafer with 9 mm dies and 3 mm edge exclusion holds 68 dies. Each <code>run_wafer</code> call draws its own run-to-run noise, then each die draws its own die-to-die noise, so no two dies are identical. This is why a recipe has to sit in the middle of the spec window, not on its edge.</p>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>Source</th><th>Scope</th><th>Size (1σ)</th><th>Hits step</th></tr></thead>
+          <tbody>
+            <tr><td><span class="tag t-hidden">furnace offsets</span></td><td>whole episode</td><td class="mono">up to ±20 / ±12 °C</td><td>20, 30</td></tr>
+            <tr><td><span class="tag t-hidden">dose factor</span></td><td>whole episode</td><td class="mono">±4 – 10 %</td><td>10</td></tr>
+            <tr><td><span class="tag t-noise">furnace temperature</span></td><td>per wafer</td><td class="mono">1 °C each furnace</td><td>20, 30</td></tr>
+            <tr><td><span class="tag t-noise">implanter dose</span></td><td>per wafer</td><td class="mono">1 %</td><td>10</td></tr>
+            <tr><td><span class="tag t-noise">dose</span></td><td>per die</td><td class="mono">1.5 %</td><td>10</td></tr>
+            <tr><td><span class="tag t-noise">oxide thickness</span></td><td>per die</td><td class="mono">1 % + radial g·r²</td><td>30</td></tr>
+            <tr><td><span class="tag t-noise">gate length</span></td><td>per die</td><td class="mono">0.02 µm + 0.02·r²</td><td>50</td></tr>
+            <tr><td><span class="tag t-noise">fixed oxide charge</span></td><td>per die</td><td class="mono">1e10 cm⁻²</td><td>70</td></tr>
+          </tbody>
+        </table></div>
+        <p class="note">Level 1 halves every random sigma. Levels 1 and 2 have no hidden offsets.</p>
+      </div>
+      <div class="ex"><span class="eyebrow">Why it matters</span>
+        <dl><dt>Vt spread, good recipe</dt><dd>≈ 18 mV</dd><dt>spec half-width</dt><dd>50 mV</dd><dt>15 °C anneal error</dt><dd class="bad">yield → ~0</dd></dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== METROLOGY + SCORE ===================== -->
+  <section>
+    <div class="layer-head"><h2>Layer 4 · Metrology and scoring</h2><span class="eyebrow">what the agent sees, and how it is graded</span></div>
+
+    <div class="step">
+      <div class="stepno"><strong>100</strong>measure</div>
+      <div class="body">
+        <h3>Noisy measurements on test wafers</h3>
+        <p class="what">The agent never sees true values. Each reading adds fresh measurement noise, so repeating a reading averages the noise down. Spreading readings over more dies shows the real spread instead.</p>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>Tool</th><th>Returns</th><th>Noise (1σ)</th><th>Cost</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">ellipsometer</td><td>t_ox per site</td><td class="mono">0.15 nm</td><td class="mono">0.005 / site</td></tr>
+            <tr><td class="mono">four_point_probe</td><td>sheet resistance of the boron layer (monitor wafer)</td><td class="mono">1 %</td><td class="mono">0.005 / site</td></tr>
+            <tr><td class="mono">electrical</td><td>Vt, Ion, Ioff per die</td><td class="mono">3 mV, 0.5 %, 0.03 dec</td><td class="mono">0.02 / die</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="ex"><span class="eyebrow">Default recipe, monitor</span>
+        <dl><dt>sheet resistance</dt><dd>18.1 kΩ/sq</dd></dl>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="stepno"><strong>110</strong>lot</div>
+      <div class="body">
+        <h3>Production lot and score</h3>
+        <p class="what"><code>submit_recipe</code> runs steps 10–90 on 15 fresh wafers (1,020 dies), using the same hidden fab state but new random draws. A die passes only if all four specs hold on its true values.</p>
+        <div class="eq">pass  = 0.50 ≤ Vt ≤ 0.60 V  and  Ion ≥ 3.5 mA  and  Ioff ≤ 20 pA  and  t_ox ≥ 7 nm
+yield = passing dies / 1020
+score = max(0, yield − 0.005 × budget spent)          no submission → 0</div>
+      </div>
+      <div class="ex"><span class="eyebrow">Default recipe</span>
+        <dl><dt>yield</dt><dd class="bad">0 %</dd><dt>score</dt><dd class="bad">0.00</dd><dt>reference, level 3</dt><dd class="good">≈ 0.98</dd></dl>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="layer-head"><h2>The agent's loop around the route</h2><span class="eyebrow">budget 6 (L1) or 20 (L2, L3) · max 100 tool calls</span></div>
+    <div class="loop">
+      <div class="card"><code>read_docs(topic)</code><span class="cost">free</span><p>Every equation on this page, with constants. Level 3 docs also give the bounds of the hidden offsets.</p></div>
+      <div class="card"><code>run_wafer(recipe)</code><span class="cost">1.0 per wafer</span><p>Runs steps 10–90 once and returns a wafer id. No data until you measure.</p></div>
+      <div class="card"><code>measure(wafer, tool, dies)</code><span class="cost">0.005 – 0.02 per site</span><p>Step 100 on chosen dies. This is the only window into the hidden state.</p></div>
+      <div class="card"><code>submit_recipe(recipe)</code><span class="cost">ends the episode</span><p>Step 110. One shot. Nothing carries over except the recipe.</p></div>
+    </div>
+    <div class="score">
+      <p class="what" style="color: var(--ink-2)"><strong style="color: var(--ink)">What a strong run does.</strong> In level 3 it runs a cold-anneal and a hot-anneal test wafer, measures oxide, sheet resistance and Vt, and works back to the furnace offsets and dose factor. Then it optimises the documented model with those offsets, preferring recipes that tolerate the variation in step 90. It verifies once and submits, spending about 4 budget units.</p>
+      <p class="what" style="color: var(--ink-2)"><strong style="color: var(--ink)">Where a weak run goes wrong.</strong> It tunes one knob at a time while the oxidation knobs move Vt two ways (steps 30 and 40). It uses ΔVt = qQ/C_ox and misses step 60 by a factor of two. It trusts setpoints and lands 15 °C off the window. It reads one die and takes noise for signal.</p>
+    </div>
+  </section>
+</div>
